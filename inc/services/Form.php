@@ -29,16 +29,21 @@ class Form
     }
 
     /**
-     * Input
-     * @param $type
      * @param $name
-     * @return string
+     * @return |null
      */
 
     private function getValue($name)
     {
         return !empty($this->post[$name]) ? $this->post[$name] : null;
     }
+
+    /**
+     * input
+     * @param string $type
+     * @param string $name
+     * @return string
+     */
 
     public function input(string $type, string $name)
     {
@@ -50,16 +55,24 @@ class Form
     /**
      * Error
      * @param $name
+     * @return mixed
      */
 
     public function error($name)
     {
-        /*$error = '';
-        if (!empty())
-        {
-            $error = ;
-        }
-        return '<span class="error">' . $error .  '</span>';*/
+        $error = !empty($this->errors[$name]) ? $this->errors[$name] : '';
+        return '<span class="error">' . $error .  '</span>';
+    }
+
+    /**
+     * textarea
+     * @param $name
+     * @return string
+     */
+
+    public function textarea($name)
+    {
+        return '<textarea name="' . $name . '"></textarea>';
     }
 
     /**

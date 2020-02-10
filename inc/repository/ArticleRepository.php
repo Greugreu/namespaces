@@ -31,4 +31,15 @@ class ArticleRepository
 
         return $article;
     }
+
+    public function insert($title, $content)
+    {
+        global $pdo;
+        $sql = "INSERT INTO $this->table VALUES (NULL, :title, :content, NOW(), 'new')";
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':title', $title, PDO::PARAM_STR);
+        $query->bindValue(':content', $content, PDO::PARAM_STR);
+        $query->execute();
+        return $pdo->lastInsertId();
+    }
 }
